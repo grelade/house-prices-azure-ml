@@ -1,10 +1,5 @@
 #!/bin/sh
 
-# Create random string
-guid=$(cat /proc/sys/kernel/random/uuid)
-suffix=${guid//[-]/}
-suffix=${suffix:0:10}
-
 az group create --name rg-house-prices-e2e --location westeurope
 az configure --defaults group=rg-house-prices-e2e
 az ml workspace create --name mlw-house-prices-e2e-zaq12wsx
