@@ -8,6 +8,7 @@ import mlflow
 import argparse
 
 from sklearn.linear_model import LinearRegression
+from sklearn.kernel_ridge import KernelRidge
 
 from data_prep_func import clean_df, feat_eng, ft_split, col_flags, parse_flags_to_robust, parse_flags_to_minmax
 from train_model_func import train_model_nestgrid, train_model
@@ -20,12 +21,14 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--train_data", type = str)
 parser.add_argument("--test_data", type = str)
 parser.add_argument("--data_description", type = str)
+parser.add_argument("--kernel",type=str, default='linear')
 
 args = parser.parse_args()
 
 train_data = args.train_data
 test_data = args.test_data
 data_description = args.data_description
+kernel = args.kernel
 
 # loading train and test data together to ensure all present categories are encoded
 df = pd.read_csv(train_data,index_col=0)
@@ -56,7 +59,7 @@ hparams = {}
 with mlflow.start_run():
     mlflow.sklearn.autolog()
 
-    model, mse_train,mse_test = train_model(LinearRegression(),X,y, 
+    model, mse_train,mse_test = train_model(KernelRidge(kernel = kernel),X,y, 
     cols_robust = cols_robust, 
     cols_minmax = cols_minmax, 
     cols_impute = cols_impute)
@@ -65,7 +68,7 @@ with mlflow.start_run():
     print('MSE train',mse_train)
     print('MSE test',mse_test)
 
-
+    mlflow.log_metric('mse_test',mse_test)
 
     y_pred = model.predict(X_test)
     results = X_test.copy()
