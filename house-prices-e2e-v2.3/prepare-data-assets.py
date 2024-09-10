@@ -34,8 +34,8 @@ data_description = Data(
     name="data-desc"
 )
 
-data_directory = Data(path = f'./data/', 
-type = AssetTypes.URI_FOLDER, 
+data_directory = Data(path = f'./data/',
+type = AssetTypes.URI_FOLDER,
 description="data directory",
 name='data-dir')
 
@@ -59,12 +59,12 @@ data_asset = ml_client.data.get("data-desc", version=1)
 
 # txt file must be downloaded to be read (???)
 import azure.ai.ml._artifacts._artifact_utilities as artifact_utils
-artifact_utils.download_artifact_from_aml_uri(data_asset.path, 
-destination ='.', 
+artifact_utils.download_artifact_from_aml_uri(data_asset.path,
+destination ='.',
 datastore_operation=ml_client.datastores)
 
 with open('./data_description.txt','r') as fp:
-    
+
     for line in list(fp.readlines())[:5]:
         print(line)
 

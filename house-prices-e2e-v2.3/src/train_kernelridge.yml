@@ -1,0 +1,27 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+type: command
+
+name: train_kernelridge
+display_name: train KernelRidge model
+version: 1
+
+code: ./train_kernelridge_src
+
+inputs:
+  prep_data_dir:
+    type: uri_folder
+  kernel:
+    type: string
+    default: linear
+
+outputs:
+  output_dir:
+    type: uri_folder
+
+environment: azureml:AzureML-sklearn-1.5@latest
+
+command: >-
+  python train_kernelridge.py
+  --prep_data_dir ${{inputs.prep_data_dir}}
+  --output_dir ${{outputs.output_dir}}
+  --kernel ${{inputs.kernel}}

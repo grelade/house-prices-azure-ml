@@ -1,7 +1,6 @@
 #train_model_func.py
 
 import numpy as np
-import pandas as pd
 
 from sklearn.metrics import mean_squared_error as MSE
 
@@ -33,6 +32,7 @@ from sklearn.ensemble import StackingRegressor
 from sklearn import set_config
 set_config(transform_output = "pandas")
 
+from data_prep_func import load_prep_data, parse_flags_to_robust, parse_flags_to_minmax, col_flags
 
 # import lightgbm as lgbm
 
@@ -137,3 +137,32 @@ def get_model(model_type: str):
         return LinearRegression
 
 
+
+def train_model_component(prep_data_dir,
+                          model_type,
+                          model_params):
+
+    X, y, X_test = load_prep_data(prep_data_dir)
+
+    cols_robust = parse_flags_to_robust(col_flags)
+    cols_minmax = parse_flags_to_minmax(col_flags)
+    cols_impute = list(X_test.columns[X_test.isna().any()])
+
+    model = get_model(model_type = model_type)
+    model, mse_train,mse_test = train_model(model(**model_params),
+                                            X,
+                                            y,
+                                            cols_robust = cols_robust,
+                                            cols_minmax = cols_minmax,
+                                            cols_impute = cols_impute)
+
+
+    return model, mse_train, mse_test
+
+def predict_model_component(model, X_test):
+    y_pred = model.predict(X_test)
+    results_test = X_test.copy()
+    results_test['SalePriceLog'] = y_pred
+    results_test['SalePrice'] = np.exp(results_test['SalePriceLog'])
+
+    return results_test
