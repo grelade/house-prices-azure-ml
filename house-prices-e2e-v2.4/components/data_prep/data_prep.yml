@@ -1,0 +1,24 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+type: command
+
+name: data_prep
+display_name: data preparation step
+version: 1
+
+code: ./
+
+inputs:
+  data_dir:
+    type: uri_folder
+
+outputs:
+  prep_data_dir:
+    type: uri_folder
+
+environment: azureml:AzureML-sklearn-1.5@latest
+  #azureml:sklearn-mltable:0.1.0
+
+command: >-
+  python data_prep.py
+  --data_dir ${{inputs.data_dir}}
+  --prep_data_dir ${{outputs.prep_data_dir}}
