@@ -1,0 +1,24 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+type: command
+
+name: kaggle_upload
+display: upload submission to Kaggle
+version: 1
+
+code: ./kaggle_upload
+additional_includes:
+    - ../secrets/kaggle.json
+
+inputs:
+  results_dir:
+    type: uri_folder
+
+  submission_message:
+    type: string
+    default: aml_submission_test
+
+environment: azureml:kaggle-env:0.1
+
+command: >-
+  ./kaggle_upload.sh --results_dir ${{inputs.results_dir}} --submission_message "${{inputs.submission_message}}"
+
