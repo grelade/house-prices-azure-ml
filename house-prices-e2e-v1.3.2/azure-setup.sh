@@ -6,6 +6,3 @@ az ml workspace create --name mlw-house-prices-e2e-zaq12wsx
 az configure --defaults workspace=mlw-house-prices-e2e-zaq12wsx
 az ml compute create --name ci-zaq12wsx --size STANDARD_DS11_V2 --type ComputeInstance
 az ml compute create --name aml-cluster --size STANDARD_DS11_V2 --max-instances 1 --type AmlCompute
-
-./setup-kaggle-key.sh
-
