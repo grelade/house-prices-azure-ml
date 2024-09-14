@@ -7,11 +7,9 @@ Technical details on the versions are given below.
 
 version | dataset | AML framework | MLOps | parameter hypertuning | output | comments |
 --------|---------|---------------|-------|-----------------------|--------|----------|
-house-prices-e2e-v1 | local file | single job | - | sklearn.GridCV | submission file | - |
-house-prices-e2e-v2 | Data Asset | single job | MLflow | - | submission file | - |
-house-prices-e2e-v2.1 | Data Asset | sweep job | MLflow | sweep | submission file | - |
-house-prices-e2e-v2.3 | Data Asset | pipeline | MLflow | - | submission file | separate ML and AML logic |
-house-prices-e2e-v2.4 | Data Asset | pipeline | MLflow | - | submission file + model | pipeline-compatible refactor |
-house-prices-e2e-v2.5 | Data Asset | pipeline | MLflow | - | submission file + model + upload | auto-upload to kaggle |
-house-prices-e2e-v2.6 | Data Asset | pipeline | MLflow | sweep | submission file + model + upload | - |
+house-prices-e2e-v1.0 | local file | single job | - | sklearn.GridCV | submission file | - |
+house-prices-e2e-v1.1 | Data Asset | single job | MLflow | - | submission file | - |
+house-prices-e2e-v1.2 | Data Asset | sweep job | MLflow | sweep | submission file | - |
+house-prices-e2e-v1.3 | Data Asset | pipeline | MLflow | - | submission file | separate ML and AML logic |
+house-prices-e2e-v1.4 | Data Asset | pipeline | MLflow | sweep | submission file + model + upload | output model, auto-upload to kaggle |
 
