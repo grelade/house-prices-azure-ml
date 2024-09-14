@@ -7,9 +7,9 @@ Technical details on the versions are given below.
 
 version | dataset | AML framework | MLOps | parameter hypertuning | output | comments |
 --------|---------|---------------|-------|-----------------------|--------|----------|
-house-prices-e2e-v1.0 | local file | single job | - | sklearn.GridCV | submission file | - |
-house-prices-e2e-v1.1 | Data Asset | single job | MLflow | - | submission file | - |
-house-prices-e2e-v1.2 | Data Asset | sweep job | MLflow | sweep | submission file | - |
-house-prices-e2e-v1.3 | Data Asset | pipeline | MLflow | - | submission file | separate ML and AML logic |
-house-prices-e2e-v1.4 | Data Asset | pipeline | MLflow | sweep | submission file + model + upload | output model, auto-upload to kaggle |
+v1.0 | local file | single job | - | sklearn.GridCV | submission file | - |
+v1.1 | Data Asset | single job | MLflow | - | submission file | - |
+v1.2 | Data Asset | sweep job | MLflow | sweep | submission file | - |
+v1.3 | Data Asset | pipeline | MLflow | - | submission file | separate ML and AML logic |
+v1.4 | Data Asset | pipeline | MLflow | sweep | submission file + model + upload | output model, auto-upload to kaggle |
 
